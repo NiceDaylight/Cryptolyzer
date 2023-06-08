@@ -1,0 +1,51 @@
+﻿<Window x:Class="Cryptolyzer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Cryptolyzer"
+        mc:Ignorable="d"
+        WindowStyle="SingleBorderWindow"
+        Loaded="Window_Loaded" WindowStartupLocation="CenterOwner"
+        >
+
+    <!-- Main page content -->
+    <Grid x:Name="ContentView">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65 px"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="5 px"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" Background="{StaticResource Primary}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70 px"/>
+                <ColumnDefinition Width="150 px"/>
+                <ColumnDefinition Width="100 px"/>
+                <ColumnDefinition Width="100 px"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Source="..\Images\bitcoin.png" Width="50" Height="50" Margin="5"/>
+            <TextBlock Grid.Column="1" Text="Cryptolyzer" FontStyle="Italic" Foreground="#FFE6CC97" FontSize="25" VerticalAlignment="Center" FontFamily="Georgia" Padding="10"/>
+            <Button Grid.Column="2" x:Name="DefaultButton" Content="Trends" Command="{Binding MonitorCommand}" CommandParameter="{Binding ElementName=ContentView}" Style="{StaticResource MenuButton}"/>
+            <Button Grid.Column="3" Content="Converter" Command="{Binding SwitchCommand}" CommandParameter="{Binding ElementName=ContentView}" Style="{StaticResource MenuButton}"/>
+            <Label Grid.Column="4" Width="200"/>
+            <Border Grid.Column="5" CornerRadius="10" Background="{StaticResource Background}" BorderThickness="1" Height="40" Padding="5" Margin="10">
+                <TextBox AllowDrop="True" Background="{StaticResource Background}" Foreground="{StaticResource Font-color}" Text="Search..." BorderBrush="Transparent" VerticalContentAlignment="Center"/>
+            </Border>
+            
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Frame x:Name="MainContent" Navigated="MainContent_Navigated" Background="{StaticResource Background}"/>
+        </Grid>
+        <Grid Background="{StaticResource Primary}" Grid.Row="2">
+            
+        </Grid>
+    </Grid>
+</Window>
