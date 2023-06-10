@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,17 +14,59 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Cryptolyzer
 {
-    /// <summary>
-    /// Interaction logic for MainPage.xaml
-    /// </summary>
     public partial class MainPage : Page
     {
+        CurrencyRepository currencyRepository;
+        private DispatcherTimer timer;
+        private List<CurrencyModel> currencies = new List<CurrencyModel>();
+        private Ping ping = new Ping();
         public MainPage()
         {
-            InitializeComponent();
+            if(ping.Send("8.8.8.8").Status == 0)
+                {
+                currencyRepository = new CurrencyRepository();
+                timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromMilliseconds(5000);
+                timer.Tick += Timer_Tick;
+                this.Loaded += Page_Loaded;
+                timer.Start();
+                InitializeComponent();
+                itemList.Visibility = Visibility.Collapsed;
+                itemList.ItemsSource = currencies;
+            }
+            else
+            {
+                currencyRepository = new CurrencyRepository();
+                timer = new DispatcherTimer();
+                TextBlock textBlock = new TextBlock();
+                textBlock.Text = "No internet connection, sorry";
+                InitializeComponent();
+                itemList.Visibility = Visibility.Collapsed;
+                Content.Child = textBlock;
+            }
+
+        }
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            await UpdateApplicationStateAsync();
+        }
+
+        private async void Page_Loaded(object sender, EventArgs e)
+        {
+            currencies = await currencyRepository.GetCurrencies();
+            itemList.ItemsSource = currencies;
+            itemList.Visibility = Visibility.Visible;
+        }
+
+        private async Task UpdateApplicationStateAsync()
+        {
+            await currencyRepository.UpdateCurrencies(currencies);
+            Debug.WriteLine("I did update it");
+            itemList.ItemsSource = currencies;
         }
     }
 }

@@ -34,7 +34,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>bitcoin.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -71,7 +77,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Model\CurrencyItem.cs" />
+    <Compile Include="Model\CurrencyModel.cs" />
+    <Compile Include="ViewModel\CurrencyRepository.cs" />
     <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -112,6 +119,25 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Resource Include="Fonts\Montserrat\Montserrat-Black.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-BlackItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Bold.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-BoldItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraBold.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraBoldItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraLight.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraLightItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Italic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Light.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-LightItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Medium.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-MediumItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Regular.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-SemiBold.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-SemiBoldItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Thin.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-ThinItalic.ttf" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -121,9 +147,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <Folder Include="Scripts\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="bitcoin.ico" />
     <Content Include="Images\bitcoin.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
