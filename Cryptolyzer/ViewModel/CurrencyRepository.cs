@@ -36,7 +36,8 @@ namespace Cryptolyzer
                             string rank = asset.rank;
                             string price = asset.priceUsd;
                             string percent = asset.changePercent24Hr;
-                            currencies.Add(new CurrencyModel(id, symbol, name, rank, price, percent));
+                            string volume = asset.volumeUsd24Hr;
+                            currencies.Add(new CurrencyModel(id, symbol, name, rank, price, volume, percent));
                         }
                         return currencies;
                     }
@@ -70,8 +71,9 @@ namespace Cryptolyzer
                         string name = responseObject.name;
                         string rank = responseObject.rank;
                         string price = responseObject.priceUsd;
+                        string volume = responseObject.volumeUsd24Hr;
                         string percent = responseObject.changePercent24Hr;
-                        return new CurrencyModel(new_id, symbol, name, rank, price, percent);
+                        return new CurrencyModel(new_id, symbol, name, rank, price, volume, percent);
                     }
                     else
                     {
@@ -109,6 +111,7 @@ namespace Cryptolyzer
                                 existingCurrency.Symbol = asset.symbol;
                                 existingCurrency.PriceUsd = asset.priceUsd;
                                 existingCurrency.ChangePercent24Hr = asset.changePercent24Hr;
+                                existingCurrency.Volume = asset.volume;
                             }
                         }
                     }

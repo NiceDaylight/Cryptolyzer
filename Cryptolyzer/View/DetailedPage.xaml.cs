@@ -24,5 +24,22 @@ namespace Cryptolyzer
         {
             InitializeComponent();
         }
+        public DetailedPage(CurrencyModel model)
+        {
+            Rank = model.Rank;
+            newName = model.NewName;
+            Symbol = model.Symbol;
+            PriceUsd = model.PriceUsd;
+            newVolume = model.Volume;
+            Percentage = model.ChangePercent24Hr;
+            InitializeComponent();
+        }
+
+        public string Rank { get; set; }
+        public string newName { get; set; }
+        public string Symbol { get; set; }
+        public string PriceUsd { get; set; }
+        public string newVolume { get; set; }
+        public string Percentage { get; set; }
     }
 }

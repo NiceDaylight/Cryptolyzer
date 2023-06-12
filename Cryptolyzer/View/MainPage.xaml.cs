@@ -45,11 +45,13 @@ namespace Cryptolyzer
                 TextBlock textBlock = new TextBlock();
                 textBlock.Text = "No internet connection, sorry";
                 InitializeComponent();
-                itemList.Visibility = Visibility.Collapsed;
+                itemList.Visibility = Visibility.Collapsed;    
                 Content.Child = textBlock;
             }
 
         }
+
+
         private async void Timer_Tick(object sender, EventArgs e)
         {
             await UpdateApplicationStateAsync();
@@ -61,11 +63,25 @@ namespace Cryptolyzer
             itemList.ItemsSource = currencies;
             itemList.Visibility = Visibility.Visible;
         }
+        private void lwvMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Get the selected item from the ListView
+            var selectedItem = itemList.SelectedItem as CurrencyModel;
+
+            if (selectedItem != null)
+            {
+                // Create an instance of the DetailedPage
+                var detailedPage = new DetailedPage(selectedItem);
+
+                // Navigate to the DetailedPage
+                NavigationService.Navigate(detailedPage);
+            }
+        }
+
 
         private async Task UpdateApplicationStateAsync()
         {
             await currencyRepository.UpdateCurrencies(currencies);
-            Debug.WriteLine("I did update it");
             itemList.ItemsSource = currencies;
         }
     }

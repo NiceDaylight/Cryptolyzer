@@ -14,6 +14,7 @@ namespace Cryptolyzer
             string name,
             string rank,
             string priceUsd,
+            string volume,
             string changePercent24Hr)
         {
             Id = id;
@@ -21,6 +22,7 @@ namespace Cryptolyzer
             NewName = name;
             Rank = rank;
             PriceUsd = priceUsd;
+            Volume = volume;
             ChangePercent24Hr = changePercent24Hr;
         }
 
@@ -30,5 +32,6 @@ namespace Cryptolyzer
         public string Rank { get; set; }
         public string PriceUsd { get; set; }
         public string ChangePercent24Hr { get; set; }
+        public string Volume { get; set; }
     }
 }

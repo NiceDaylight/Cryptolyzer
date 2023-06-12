@@ -32,17 +32,26 @@
 
             <Image Source="..\Images\bitcoin.png" Width="50" Height="50" Margin="5"/>
             <TextBlock Grid.Column="1" Text="Cryptolyzer" Foreground="{StaticResource FontColor}" FontSize="26" VerticalAlignment="Center" Height="55" FontFamily="Montserrat" Padding="10"/>
-            <Button Grid.Column="2" x:Name="DefaultButton" Content="Trends" Command="{Binding MonitorCommand}" CommandParameter="{Binding ElementName=ContentView}" Style="{StaticResource MenuButton}"/>
+            <Button Grid.Column="2" x:Name="DefaultButton" Content="Trends" Click="DefaultButton_Click" Style="{StaticResource MenuButton}"/>
             <Button Grid.Column="3" Content="Converter" Command="{Binding SwitchCommand}" CommandParameter="{Binding ElementName=ContentView}" Style="{StaticResource MenuButton}"/>
             <Label Grid.Column="4" Width="200"/>
-            <Border Grid.Column="5" CornerRadius="10" Background="{StaticResource Background}" BorderThickness="1" Height="40" Padding="5" Margin="10">
-                <TextBox AllowDrop="True" Background="{StaticResource Background}" Foreground="{StaticResource FontColor}" Text="Search..." BorderBrush="Transparent" FontFamily="Montserrat" VerticalContentAlignment="Center"/>
+            <Border Grid.Column="5" CornerRadius="10" Background="{StaticResource Background}" BorderThickness="1" Height="45" Padding="5" Margin="10">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Search:" FontSize="10" FontFamily="Montserrat" Foreground="{StaticResource FontColor}"/>
+                    <Border Grid.Row="1" CornerRadius="10" Background="#FF252931" BorderThickness="1">
+                        <TextBox AllowDrop="True"  Foreground="{StaticResource FontColor}" Style="{StaticResource TextBoxSearchStyle}" x:Name="SearchTextBox" KeyDown="SearchTextBox_KeyDown" Text="" Background="Transparent" BorderBrush="Transparent" FontFamily="Montserrat" VerticalContentAlignment="Center"/>
+                    </Border>
+                </Grid>
             </Border>
             
         </Grid>
 
         <Grid Grid.Row="1">
-            <Frame x:Name="MainContent" Navigated="MainContent_Navigated" Background="{StaticResource Background}"/>
+            <Frame Style="{StaticResource FrameStyle}" x:Name="MainContent" Navigated="MainContent_Navigated" Background="{StaticResource Background}"/>
         </Grid>
         <Grid Background="{StaticResource Primary}" Grid.Row="2">
             
