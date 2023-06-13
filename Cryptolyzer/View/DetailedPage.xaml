@@ -9,24 +9,34 @@
       Title="DetailedPage"
       Background="{StaticResource Background}"
       >
-    
-        <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+    <Page.Resources>
+        <Style x:Key="ListViewContainerStyle" TargetType="{x:Type ListViewItem}">
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Padding" Value="4,1"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="TextBlock.Foreground" Value="White"/>
+            <Setter Property="TextBlock.FontFamily" Value="Montserrat"/>
+            <Setter Property="TextBlock.FontSize" Value="12"/>
+            <Setter Property="Padding" Value="5 5 5 5"/>
+            <Setter Property="Focusable" Value="false"/>
+            <Setter Property="Height" Value="20"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Style.Triggers>
+                <Trigger Property="IsEnabled" Value="False">
+                    <Setter Property="Foreground" Value="{StaticResource FontColor}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="6*"/>
         </Grid.ColumnDefinitions>
-        <Border CornerRadius="5" Background="{StaticResource Primary}" BorderThickness="1" Padding="5" Margin="20 20 5 5">
-        </Border>
-        <Border Grid.Column="1" Grid.RowSpan="2" CornerRadius="5" Background="{StaticResource Primary}" BorderThickness="1" Padding="5" Margin="5 20 20 20">
+        <Border  CornerRadius="5" Background="{StaticResource Primary}" BorderThickness="1" Padding="5" Margin="20 20 5 20">
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="0.8*"/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
                 <Border Background="{StaticResource Background}" CornerRadius="10" Margin="5">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -42,69 +52,83 @@
                             <RowDefinition/>
                         </Grid.RowDefinitions>
                         
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0">
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0,0,0">
                         <TextBlock VerticalAlignment="Center" Text="Rank :" Padding="3"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0" Grid.Row="1">
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0,0,0" Grid.Row="1">
                             <TextBlock VerticalAlignment="Center" Text="Name :" Padding="3"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0" Grid.Row="2">
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0,0,0" Grid.Row="2">
                             <TextBlock VerticalAlignment="Center" Text="Symbol :" Padding="3"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0" Grid.Row="3">
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0,0,0" Grid.Row="3">
                             <TextBlock VerticalAlignment="Center" Text="Price :" Padding="3"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0" Grid.Row="4">
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0,0,0" Grid.Row="4">
                             <TextBlock VerticalAlignment="Center" Text="Volume :" Padding="3"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
                         <TextBlock VerticalAlignment="Center" Text="Price Change :" Padding="7,0" Grid.Row="5"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
 
 
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0" Grid.Column="1">
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="0,0,4,0" Grid.Column="1">
                             <TextBlock VerticalAlignment="Center" Text="{Binding Rank}" Padding="3" HorizontalAlignment="Center"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0" Grid.Row="1" Grid.Column="1">
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="0,0,4,0" Grid.Row="1" Grid.Column="1">
                             <TextBlock VerticalAlignment="Center" Text="{Binding newName}" Padding="3" HorizontalAlignment="Center"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0" Grid.Row="2" Grid.Column="1">
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="0,0,4,0" Grid.Row="2" Grid.Column="1">
                             <TextBlock VerticalAlignment="Center" Text="{Binding Symbol}" Padding="3" HorizontalAlignment="Center"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0" Grid.Row="3" Grid.Column="1">
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="0,0,4,0" Grid.Row="3" Grid.Column="1">
                             <TextBlock VerticalAlignment="Center" Text="{Binding PriceUsd}" Padding="3" HorizontalAlignment="Center"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
-                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="4,0" Grid.Row="4" Grid.Column="1">
-                            <TextBlock VerticalAlignment="Center" Text="{Binding Volume}" Padding="3" HorizontalAlignment="Center"
+                        <Border BorderBrush="{StaticResource FontColor}" BorderThickness="0,0,0,0.5" Margin="0,0,4,0" Grid.Row="4" Grid.Column="1">
+                            <TextBlock VerticalAlignment="Center" Text="{Binding newVolume}" Padding="3" HorizontalAlignment="Center"
                                    FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                         </Border>
 
                         <TextBlock VerticalAlignment="Center" Text="{Binding Percentage}" Padding="7,0" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Center"
-                                   FontSize="14" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
-
-
+                                   FontSize="16" FontFamily="Montserrat" Foreground="{StaticResource  FontColor}"/>
                     </Grid>
                 </Border>
             </Grid>
         </Border>
-        <Border Grid.Row="1" CornerRadius="5" Background="{StaticResource Primary}" BorderThickness="1" Padding="5" Margin="20 5 5 20">
+        <Border Grid.Column="1" CornerRadius="5" Background="{StaticResource Primary}" BorderThickness="1" Padding="5" Margin="5 20 20 20">
+            <Border x:Name="Content" CornerRadius="5" Background="{StaticResource Background}" BorderThickness="1" Padding="5" Margin="5">
+                <ListView x:Name="marketList" Style="{StaticResource ListViewStyle}" ItemsSource="{Binding MarketModels}" ItemContainerStyle="{StaticResource ListViewContainerStyle}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Market" DisplayMemberBinding="{Binding ExchangeId}" Width="100"/>
+                            <GridViewColumn Header="Base name" DisplayMemberBinding="{Binding BaseId}" Width="140"/>
+                            <GridViewColumn Header="Quote name" DisplayMemberBinding="{Binding QuoteId}" Width="140"/>
+                            <GridViewColumn Header="Base symbol" DisplayMemberBinding="{Binding BaseSymbol}" Width="130"/>
+                            <GridViewColumn Header="Quote symbol" DisplayMemberBinding="{Binding QuoteSymbol}" Width="130"/>
+                            <GridViewColumn Header="Volume" DisplayMemberBinding="{Binding VolumeUsd24Hr}" Width="100"/>
+                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding PriceUsd}" Width="60"/>
+                            <GridViewColumn Header="Volume percent" DisplayMemberBinding="{Binding VolumePercent}" Width="160"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Border>
         </Border>
     </Grid>
     

@@ -7,17 +7,27 @@ using System.Windows.Navigation;
 using Newtonsoft.Json;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Threading;
+using Microsoft.Win32;
 
 namespace Cryptolyzer
 {
     public partial class MainWindow : Window
     {
+        private HttpClient client = new HttpClient();
+        private DispatcherTimer searchTimer;
+        private bool isSearchInProgress;
         public MainWindow()
         {
             InitializeComponent();
-            SearchTextBox.KeyDown += SearchTextBox_KeyDown;
-        }
-
+            SearchTextBox.TextChanged += SearchTextBox_TextChanged;
+            searchTimer = new DispatcherTimer();
+            searchTimer.Interval = TimeSpan.FromSeconds(0.3);
+            searchTimer.Tick += SearchTimer_Tick;
+            SearchListView.DataContext = this;
+    }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             NavigateToPage(new MainPage());
@@ -41,46 +51,75 @@ namespace Cryptolyzer
         }
 
 
-
-        private async void SearchTextBox_KeyDown(object sender, KeyEventArgs e)
+        public async void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.Key == Key.Enter)
-            {
-                CurrencyModel model = await Search();
-                NavigateToPage(new DetailedPage(model));
-            }
+            searchTimer.Stop();
+            searchTimer.Start();
         }
 
-        private HttpClient client = new HttpClient();
-
-        private async Task<CurrencyModel> Search()
+        private void lwvMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            string searchTerm = SearchTextBox.Text.Trim();
-                if (!string.IsNullOrEmpty(searchTerm))
-                {
-                    try
-                    {
-                        string url = $"https://api.coincap.io/v2/assets/{searchTerm}";
-                        HttpResponseMessage response = await client.GetAsync(url);
-                        response.EnsureSuccessStatusCode();
-                        string jsonResponse = await response.Content.ReadAsStringAsync();
-                        var responseObject = JsonConvert.DeserializeObject<dynamic>(jsonResponse);
-                        string new_id = responseObject.id;
-                        string symbol = responseObject.symbol;
-                        string name = responseObject.name;
-                        string rank = responseObject.rank;
-                        string price = responseObject.priceUsd;
-                        string volume = responseObject.volumeUsd24Hr;
-                        string percent = responseObject.changePercent24Hr;
-                        return new CurrencyModel(new_id, symbol, name, rank, price, volume, percent);
-                    }
-                    catch (Exception ex)
-                    {
-                    MessageBox.Show($"Error: {ex.Message}", "Search Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    }
-                return null;
+            // Get the selected item from the ListView
+            var selectedItem = SearchListView.SelectedItem as CurrencyModel;
+
+            if (selectedItem != null)
+            {
+                // Create an instance of the DetailedPage
+                var detailedPage = new DetailedPage(selectedItem);
+
+                // Navigate to the DetailedPage
+                NavigateToPage(detailedPage);
             }
-            return null;
+            SearchTextBox.Text = "";
+            SearchResultsPopup.IsOpen = false;
+        }
+
+        private async void SearchTimer_Tick(object sender, EventArgs e)
+        {
+            searchTimer.Stop();
+            SearchResultsPopup.IsOpen = false;
+            string searchTerm = SearchTextBox.Text;
+            List<CurrencyModel> currencies = new List<CurrencyModel>();
+
+            if (!isSearchInProgress && !string.IsNullOrEmpty(searchTerm))
+            {
+                isSearchInProgress = true;
+
+                using (HttpClient client = new HttpClient())
+                    {
+                        try
+                        {
+                            HttpResponseMessage response = await client.GetAsync($"https://api.coincap.io/v2/assets/?limit=20&search={searchTerm}");
+                            if (response.IsSuccessStatusCode)
+                            {
+                                
+                                string responseBody = await response.Content.ReadAsStringAsync();
+                                Console.WriteLine(responseBody);
+                                var responseObject = JsonConvert.DeserializeObject<dynamic>(responseBody);
+                                foreach (var asset in responseObject.data)
+                                {
+                                    string id = asset.id;
+                                    string symbol = asset.symbol;
+                                    string name = asset.name;
+                                    string rank = asset.rank;
+                                    string price = asset.priceUsd;
+                                    string percent = asset.changePercent24Hr;
+                                    string volume = asset.volumeUsd24Hr;
+                                    currencies.Add(new CurrencyModel(id, symbol, name, rank, price, volume, percent));
+                                
+                                }
+                            Console.WriteLine(currencies[0].NewName);
+                            }
+                            isSearchInProgress = false;
+                            SearchResultsPopup.IsOpen = true;
+                            SearchListView.ItemsSource = currencies;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"An error occurred: {ex.Message}");
+                        }
+                    }
+            }
         }
     }
 }
