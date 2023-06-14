@@ -65,19 +65,14 @@ namespace Cryptolyzer
         }
         private void lwvMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // Get the selected item from the ListView
             var selectedItem = itemList.SelectedItem as CurrencyModel;
 
             if (selectedItem != null)
             {
-                // Create an instance of the DetailedPage
                 var detailedPage = new DetailedPage(selectedItem);
-
-                // Navigate to the DetailedPage
                 NavigationService.Navigate(detailedPage);
             }
         }
-
 
         private async Task UpdateApplicationStateAsync()
         {

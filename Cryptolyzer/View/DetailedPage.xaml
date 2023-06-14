@@ -123,7 +123,7 @@
                             <GridViewColumn Header="Base symbol" DisplayMemberBinding="{Binding BaseSymbol}" Width="130"/>
                             <GridViewColumn Header="Quote symbol" DisplayMemberBinding="{Binding QuoteSymbol}" Width="130"/>
                             <GridViewColumn Header="Volume" DisplayMemberBinding="{Binding VolumeUsd24Hr}" Width="100"/>
-                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding PriceUsd}" Width="60"/>
+                            <GridViewColumn Header="Price" DisplayMemberBinding="{Binding PriceUsd}" Width="80"/>
                             <GridViewColumn Header="Volume percent" DisplayMemberBinding="{Binding VolumePercent}" Width="160"/>
                         </GridView>
                     </ListView.View>

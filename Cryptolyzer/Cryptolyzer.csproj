@@ -61,10 +61,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="View\ConverterPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -80,12 +76,11 @@
     <Compile Include="Model\CurrencyModel.cs" />
     <Compile Include="Model\MarketModel.cs" />
     <Compile Include="ViewModel\CurrencyRepository.cs" />
+    <Compile Include="ViewModel\DetailedViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="View\ConverterPage.xaml.cs">
-      <DependentUpon>ConverterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -120,24 +115,60 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Resource Include="Fonts\Montserrat\Montserrat-Black.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-BlackItalic.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-Bold.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-BoldItalic.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-ExtraBold.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-ExtraBoldItalic.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-ExtraLight.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-ExtraLightItalic.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-Italic.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-Light.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-LightItalic.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-Medium.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-MediumItalic.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-Regular.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-SemiBold.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-SemiBoldItalic.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-Thin.ttf" />
-    <Resource Include="Fonts\Montserrat\Montserrat-ThinItalic.ttf" />
+    <Resource Include="Fonts\Montserrat\Montserrat-Black.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-BlackItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-Bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-BoldItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraBoldItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraLight.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-ExtraLightItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-Italic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-Light.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-LightItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-Medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-MediumItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-SemiBold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-SemiBoldItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-Thin.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Montserrat\Montserrat-ThinItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -147,9 +178,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Scripts\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="bitcoin.ico" />
     <Content Include="Images\bitcoin.png">
